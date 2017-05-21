@@ -16,9 +16,9 @@ foreach($ytbRes as $k => $v){
     $videoLinks = $youtube->get_video_link();
     $videoDetail = [];
     $videotype = [];
-    foreach($videoLinks as $k){
+    foreach($videoLinks as $u_k){
         $detail = [];
-        $detailUrl = 'https://www.youtube.com'.$k;
+        $detailUrl = 'https://www.youtube.com'.$u_k;
         $youtube->init($detailUrl);
         $detail['channel_id'] = $v['id'];
         $detail['title'] = $youtube->get_video_title();

@@ -10,14 +10,9 @@ include 'youtube.class.php';
 $youtube = new youtube();
 
 // 从数据库获取is_get_detail为0的数据
-$ytbRes = $youtube->db->select('ytb_channels', ['id','ytb_id'], ['is_get_video'=>0]);
+$ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['is_get_video'=>0]);
 foreach($ytbRes as $k => $v){
-    if(strlen($v['ytb_id']) == 24){
-        $videourl = 'https://www.youtube.com/channel/'.$v['ytb_id'].'/videos';
-    }else{
-        $videourl = 'https://www.youtube.com/user/'.$v['ytb_id'].'/videos';
-    }
-    $youtube->init($videourl);
+    $youtube->init($v['user_url']);
     $videoLinks = $youtube->get_video_link();
     $videoDetail = [];
     $videotype = [];

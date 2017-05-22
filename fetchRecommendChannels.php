@@ -25,5 +25,6 @@ foreach($ytbRes as $k => $v){
     $youtubeInfo['user_facebook'] = $friendLink['facebook'];
     $youtubeInfo['created'] = time();
     $youtubeInfo['is_get_detail'] = 1;
-    $id = $youtube->db->update("ytb_channels", $youtubeInfo, ['ytb_id'=>$v]);
+
+    $id = $youtube->db->update("ytb_channels", $youtubeInfo, ['id'=>$v['id']]);
 }

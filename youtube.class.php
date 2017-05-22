@@ -45,7 +45,6 @@ class youtube
      * @return string
      */
     public function get_channel_name(){
-        var_dump($this->content);exit;
         preg_match('/<title>(.*?)<\/title>/is', $this->content, $matches);
 
         $res = explode('-',$this->unescape($matches[1]));

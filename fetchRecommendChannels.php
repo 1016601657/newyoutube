@@ -10,18 +10,9 @@ include 'youtube.class.php';
 $youtube = new youtube();
 //初始化youtube首页
 //查询出所有的channel
-$ytbRes = $youtube->db->select('ytb_channels','ytb_id',['AND'=>['subscribers'=>0,'is_get_detail'=>1]]);
+$ytbRes = $youtube->db->select('ytb_channels',['id','user_url'], ['id'=>[119,120,121]]);
 foreach($ytbRes as $k => $v){
-    if(strlen($v) == 24){
-        $url = 'https://www.youtube.com/channel/'.$v.'/about';
-        $ytb_type = 'channel';
-    }else{
-        $url = 'https://www.youtube.com/user/'.$v.'/about';
-        $ytb_type = 'user';
-    }
-    echo $url;exit;
-    $youtube->init($url);
-    $youtubeInfo['ytb_type'] = $ytb_type;
+    $youtube->init($v['user_url']);
     $youtubeInfo['username'] = $youtube->get_channel_name();
     $youtubeInfo['subscribers'] = $youtube->get_subscribers();
     $youtubeInfo['views'] = $youtube->get_views();

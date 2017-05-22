@@ -10,7 +10,7 @@ include 'youtube.class.php';
 $youtube = new youtube();
 //初始化youtube首页
 //查询出所有的channel
-$ytbRes = $youtube->db->select('ytb_channels',['id','user_url'], ['id'=>[119,120,121]]);
+$ytbRes = $youtube->db->select('ytb_channels',['id','user_url'], ['id'=>[122,123,124,125,126,127,128,129,130]]);
 foreach($ytbRes as $k => $v){
     $youtube->init($v['user_url']);
     $youtubeInfo['username'] = $youtube->get_channel_name();

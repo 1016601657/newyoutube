@@ -22,7 +22,7 @@ class youtube
             'database_name' => 'new_youtube',
             'server' => '127.0.0.1',
             'username' => 'root',
-            'password' => 'root',
+            'password' => '13f05b50ae',
             'charset' => 'utf8',
             'port' => 3306,
             'option' => [PDO::ATTR_CASE => PDO::CASE_NATURAL]
@@ -45,7 +45,6 @@ class youtube
      * @return string
      */
     public function get_channel_name(){
-        var_dump($this->content);exit;
         preg_match('/<title>(.*?)<\/title>/is', $this->content, $matches);
 
         $res = explode('-',$this->unescape($matches[1]));
@@ -267,7 +266,7 @@ class youtube
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC); //代理认证模式
         curl_setopt($ch, CURLOPT_PROXY, "127.0.0.1"); //代理服务器地址
-        curl_setopt($ch, CURLOPT_PROXYPORT, 1087); //代理服务器端口
+        curl_setopt($ch, CURLOPT_PROXYPORT, 8123); //代理服务器端口
         // curl_setopt($ch, CURLOPT_PROXYUSERPWD, ":"); //http代理认证帐号，username:password的格式
         curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP); //使用http代理模式
         $file_contents = curl_exec($ch);

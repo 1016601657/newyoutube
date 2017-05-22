@@ -14,6 +14,7 @@ $ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['is_get_video
 foreach($ytbRes as $k => $v){
     $v['user_url'] = str_replace('about','videos',$v['user_url']);
     $youtube->init($v['user_url']);
+
     $videoLinks = $youtube->get_video_link();
     $videoDetail = [];
     $videotype = [];

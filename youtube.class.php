@@ -22,7 +22,7 @@ class youtube
             'database_name' => 'new_youtube',
             'server' => '127.0.0.1',
             'username' => 'root',
-            'password' => '13f05b50ae',
+            'password' => 'root',
             'charset' => 'utf8',
             'port' => 3306,
             'option' => [PDO::ATTR_CASE => PDO::CASE_NATURAL]

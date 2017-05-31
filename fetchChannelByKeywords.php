@@ -23,7 +23,9 @@ foreach($keywords as $word){
                 $ytbRes = $youtube->db->insert('ytb_channels',['ytb_id'=>$r_k,'keywords'=>$word]);
             }
         }
-        $url = $youtube->get_next_url();
+        $url = 'https://www.youtube.com/'.$youtube->get_next_url();
+        echo $url;
+        echo '======';
         $i++;
     }
 }

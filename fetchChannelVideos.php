@@ -8,9 +8,12 @@
 // 引入youtube类
 include 'youtube.class.php';
 $youtube = new youtube();
-
+while(1){
 // 从数据库获取is_get_detail为0的数据
-$ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['is_get_video'=>0]);
+$ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['is_get_video'=>0,'LIMIT'=>100]);
+if(count($ytbRes) == 0){
+exit;
+}
 foreach($ytbRes as $k => $v){
     $v['user_url'] = str_replace('about','videos',$v['user_url']);
     $youtube->init($v['user_url']);
@@ -35,3 +38,5 @@ foreach($ytbRes as $k => $v){
     $first_key = key($videotype);
     $youtube->db->update("ytb_channels", ['type'=>$first_key,'is_get_video'=>1],['id'=>$v['id']]);
 }
+}
+

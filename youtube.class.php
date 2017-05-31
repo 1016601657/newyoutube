@@ -265,8 +265,8 @@ class youtube
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC); //代理认证模式
-        curl_setopt($ch, CURLOPT_PROXY, "127.0.0.1"); //代理服务器地址
-        curl_setopt($ch, CURLOPT_PROXYPORT, 8123); //代理服务器端口
+        curl_setopt($ch, CURLOPT_PROXY, "http://duotai:7TYTE5TzI@sheraton.h.xduotai.com"); //代理服务器地址
+        curl_setopt($ch, CURLOPT_PROXYPORT, 22439); //代理服务器端口
         // curl_setopt($ch, CURLOPT_PROXYUSERPWD, ":"); //http代理认证帐号，username:password的格式
         curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP); //使用http代理模式
         $file_contents = curl_exec($ch);

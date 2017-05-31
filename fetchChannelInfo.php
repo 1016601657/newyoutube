@@ -10,7 +10,8 @@ include 'youtube.class.php';
 $youtube = new youtube();
 while(1){
 // 从数据库获取is_get_detail为0的数据
-$ytbRes = $youtube->db->select('ytb_channels', 'ytb_id', ['is_get_detail'=>0,'LIMIT'=>100]);
+//$ytbRes = $youtube->db->select('ytb_channels', 'ytb_id', ['is_get_detail'=>0]);
+$ytbRes = $youtube->db->select('ytb_channels', 'ytb_id', ['AND'=>['is_get_video'=>0,'keywords'=>['unboxing','reviews','gadgets','smart tech']]]);
 if(count($ytbRes) == 0){
 exit;
 }

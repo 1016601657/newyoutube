@@ -10,7 +10,8 @@ include 'youtube.class.php';
 $youtube = new youtube();
 
 // 从数据库获取is_get_detail为0的数据
-$ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['is_get_video'=>0]);
+//$ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['is_get_video'=>0]);
+$ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['AND'=>['is_get_video'=>0,'keywords'=>['unboxing','reviews','gadgets','smart tech']]]);
 foreach($ytbRes as $k => $v){
     $v['user_url'] = str_replace('about','videos',$v['user_url']);
     $youtube->init($v['user_url']);

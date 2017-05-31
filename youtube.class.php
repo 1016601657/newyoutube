@@ -222,6 +222,26 @@ class youtube
             }
         }
     }
+
+    public function get_search_chennel(){
+        preg_match_all('/<div class="yt-lockup-byline ">(.*?)<\/div>/is', $this->content, $matches);
+        $searchLinks = [];
+
+        foreach($matches[1] as $li){
+            preg_match("/<a .*?href=\"(.*?)\".*?>/is",$li,$hrefMatch);// 获取href
+            $searchLinks[] = $this->getYtbId($hrefMatch[1]);
+        }
+        return $searchLinks;
+    }
+    public function get_next_url(){
+        preg_match('/<div class="branded-page-box search-pager  spf-link ">(.*?)<\/div>/is', $this->content, $matches);
+        preg_match_all("/<a .*?href=\"(.*?)\".*?>/is",$matches[1],$hrefMatch);// 获取href
+        return array_pop($hrefMatch[1]);
+    }
+    /**
+     * @param $ytb_id
+     * @return mixed
+     */
     public function is_exist_channel($ytb_id){
         $newYtbInfo = $db->select("ytb_video", "*", ['ytb_id'=>$ytb_id]);
         if($newYtbInfo){
@@ -265,9 +285,9 @@ class youtube
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC); //代理认证模式
-        curl_setopt($ch, CURLOPT_PROXY, "127.0.0.1"); //代理服务器地址
-        curl_setopt($ch, CURLOPT_PROXYPORT, 1087); //代理服务器端口
-        // curl_setopt($ch, CURLOPT_PROXYUSERPWD, ":"); //http代理认证帐号，username:password的格式
+        curl_setopt($ch, CURLOPT_PROXY, "sheraton.h.xduotai.com"); //代理服务器地址
+        curl_setopt($ch, CURLOPT_PROXYPORT, 22439); //代理服务器端口
+        curl_setopt($ch, CURLOPT_PROXYUSERPWD, "duotai:7TYTE5TzI"); //http代理认证帐号，username:password的格式
         curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP); //使用http代理模式
         $file_contents = curl_exec($ch);
         curl_close($ch);

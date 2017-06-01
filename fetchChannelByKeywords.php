@@ -24,6 +24,8 @@ foreach($keywords as $word){
             }
         }
         $url = 'https://www.youtube.com/results?q=unboxing&page='.$i;
+        echo $url;
+        echo chr(10);
         $i++;
     }
 }

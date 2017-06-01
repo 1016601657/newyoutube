@@ -13,7 +13,7 @@ $keywords = ['unboxing','reviews','gadgets','smart tech'];
 foreach($keywords as $word){
     $i = 2;
     $url = 'https://www.youtube.com/results?search_query='.urlencode($word);
-    while($i < 200){
+    while($i < 35){
         $youtube->init($url);
         $channelList = $youtube->get_search_channel();
 //         检查是否获取过

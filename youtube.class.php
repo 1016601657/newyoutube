@@ -223,13 +223,19 @@ class youtube
         }
     }
 
-    public function get_search_chennel(){
+    public function get_search_channel(){
         preg_match_all('/<div class="yt-lockup-byline ">(.*?)<\/div>/is', $this->content, $matches);
-        $searchLinks = [];
-
-        foreach($matches[1] as $li){
-            preg_match("/<a .*?href=\"(.*?)\".*?>/is",$li,$hrefMatch);// 获取href
-            $searchLinks[] = $this->getYtbId($hrefMatch[1]);
+        preg_match_all('/<h3 class="yt-lockup-title ">(.*?)<\/h3>/is', $this->content, $urlMatches);
+        $count = count($matches[1]);
+        for($m = 0; $m < $count; $m++){
+            $hrefMatch = '';
+            $urlMatch = '';
+            $arr = [];
+            preg_match("/<a .*?href=\"(.*?)\".*?>/is",$matches[1][$m],$hrefMatch);// 获取href
+            $arr['ytb_id'] = $this->getYtbId($hrefMatch[1]);
+            preg_match("/<a .*?href=\"(.*?)\".*?>/is",$urlMatches[1][$m],$urlMatch);// 获取href
+            $arr['url'] = 'https://www.youtube.com'.$urlMatch[1];
+            $searchLinks[] = $arr;
         }
         return $searchLinks;
     }

@@ -662,7 +662,7 @@ class medoo
 		}
 
 		$sql =  'SELECT ' . $column . ' FROM ' . $table . $this->where_clause($where);
-        echo $sql;
+//        echo $sql;
         return $sql;
 	}
 

@@ -31,6 +31,7 @@ while (1) {
             $detail['upload_time'] = $youtube->get_video_upload();
             $detail['view'] = $youtube->get_video_view();
             $detail['type'] = $youtube->get_video_type();
+            $detail['url'] = $detailUrl;
             $videotype[$detail['type']]++;
             $res = $youtube->db->insert("ytb_video", $detail);
         }

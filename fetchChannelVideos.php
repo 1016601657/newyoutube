@@ -33,12 +33,12 @@ while (1) {
             $detail['type'] = $youtube->get_video_type();
             $detail['url'] = $detailUrl;
             $videotype[$detail['type']]++;
-            $res = $youtube->db->insert("ytb_video", $detail);
+            $res = $youtube->db->insert("ytb_search_video", $detail);
         }
         arsort($videotype);
         reset($videotype);
         $first_key = key($videotype);
-        $youtube->db->update("ytb_channels", ['type' => $first_key, 'is_get_video' => 1], ['id' => $v['id']]);
+        $youtube->db->update("ytb_search_channels", ['type' => $first_key, 'is_get_video' => 1], ['id' => $v['id']]);
     }
 }
 

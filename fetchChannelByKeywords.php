@@ -11,21 +11,19 @@ $youtube = new youtube();
 //初始化youtube首页
 $keywords = ['unboxing','reviews','gadgets','smart tech'];
 foreach($keywords as $word){
-    $i = 0;
+    $i = 2;
     $url = 'https://www.youtube.com/results?search_query='.urlencode($word);
-    while($i < 100){
+    while($i < 200){
         $youtube->init($url);
         $channelList = $youtube->get_search_channel();
-        // 检查是否获取过
+//         检查是否获取过
         foreach($channelList as $r_k => $r_v){
-            $isExist = $youtube->db->select('ytb_channels','id',['ytb_id'=>$r_v['ytb_id']]);
+            $isExist = $youtube->db->select('ytb_search_channels','id',['ytb_id'=>$r_v['ytb_id']]);
             if(!$isExist){
-                $ytbRes = $youtube->db->insert('ytb_channels',['ytb_id'=>$r_v['ytb_id'],'keywords'=>$word,'search_video_url'=>$r_v['url']]);
+                $ytbRes = $youtube->db->insert('ytb_search_channels',['ytb_id'=>$r_v['ytb_id'],'keywords'=>$word,'search_video_url'=>$r_v['url']]);
             }
         }
-        $url = 'https://www.youtube.com/'.$youtube->get_next_url();
-        echo $url;
-        echo '======';
+        $url = 'https://www.youtube.com/results?q=unboxing&page='.$i;
         $i++;
     }
 }

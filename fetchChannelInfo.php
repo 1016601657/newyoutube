@@ -37,7 +37,7 @@ while (1) {
         $youtubeInfo['user_facebook'] = $friendLink['facebook'];
         $youtubeInfo['created'] = time();
         $youtubeInfo['is_get_detail'] = 1;
-        $id = $youtube->db->update("ytb_channels", $youtubeInfo, ['ytb_id' => $v]);
+        $id = $youtube->db->update("ytb_search_channels", $youtubeInfo, ['ytb_id' => $v]);
 
         $recommendLinks = $youtube->get_recommend_links();
         // 检查是否获取过

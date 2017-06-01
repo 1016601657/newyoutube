@@ -23,7 +23,7 @@ foreach($keywords as $word){
                 $ytbRes = $youtube->db->insert('ytb_search_channels',['ytb_id'=>$r_v['ytb_id'],'keywords'=>$word,'search_video_url'=>$r_v['url']]);
             }
         }
-        $url = 'https://www.youtube.com/results?q=.'.urlencode($word).'.&page='.$i;
+        $url = 'https://www.youtube.com/results?q='.urlencode($word).'&page='.$i;
         echo $url;
         echo chr(10);
         $i++;

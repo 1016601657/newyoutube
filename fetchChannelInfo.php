@@ -41,10 +41,10 @@ while (1) {
 
         $recommendLinks = $youtube->get_recommend_links();
         // 检查是否获取过
-        foreach ($recommendLinks as $r_k) {
-            $isExist = $youtube->db->select('ytb_channels', 'id', ['ytb_id' => $r_k]);
+        foreach ($recommendLinks as $r_k => $r_v) {
+            $isExist = $youtube->db->select('ytb_channels', 'id', ['ytb_id' => $r_v['ytb_id']]);
             if (!$isExist) {
-                $ytbRes = $youtube->db->insert('ytb_channels', ['ytb_id' => $r_k]);
+                $ytbRes = $youtube->db->insert('ytb_channels', ['ytb_id' => $r_v['ytb_id'],'ytb_type'=>$r_v['ytb_type']]);
             }
         }
     }

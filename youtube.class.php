@@ -171,7 +171,9 @@ class youtube
         $recommendLinks = [];
         foreach($liMatches[1] as $key){
             preg_match("/<a .*?href=\"(.*?)\".*?>/is",$key,$hrefMatch);// 获取href
-                $recommendLinks[] = $this->getYtbId($hrefMatch[1]);
+            $ytbInfo['ytb_id'] = $this->getYtbId($hrefMatch[1]);
+            $ytbInfo['ytb_type'] = $this->getYtbType($hrefMatch[1]);
+            $recommendLinks[] = $ytbInfo;
         }
         return $recommendLinks;
     }
@@ -258,6 +260,9 @@ class youtube
     }
     public function getYtbId($str){
         return explode('/',$str)[2];
+    }
+    public function getYtbType($str){
+        return explode('/',$str)[1];
     }
     /**
      * unicode 转 中文

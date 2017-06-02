@@ -10,7 +10,7 @@ include 'youtube.class.php';
 $youtube = new youtube();
 while (1) {
 // 从数据库获取is_get_detail为0的数据
-$ytbRes = $youtube->db->select('ytb_channels', 'ytb_id', ['is_get_detail'=>0,'LIMIT'=>100]);
+$ytbRes = $youtube->db->select('ytb_channels', 'ytb_id', ['is_get_detail'=>0]);
 //    $ytbRes = $youtube->db->select('ytb_search_channels', 'ytb_id', ['AND' => ['is_get_detail' => 0, 'keywords' => ['unboxing', 'reviews', 'gadgets', 'smart tech']]]);
     if (count($ytbRes) == 0) {
         exit;
@@ -39,13 +39,13 @@ $ytbRes = $youtube->db->select('ytb_channels', 'ytb_id', ['is_get_detail'=>0,'LI
         $youtubeInfo['is_get_detail'] = 1;
         $id = $youtube->db->update("ytb_channels", $youtubeInfo, ['ytb_id' => $v]);
 
-        $recommendLinks = $youtube->get_recommend_links();
-        // 检查是否获取过
-        foreach ($recommendLinks as $r_k => $r_v) {
-            $isExist = $youtube->db->select('ytb_channels', 'id', ['ytb_id' => $r_v['ytb_id']]);
-            if (!$isExist) {
-                $ytbRes = $youtube->db->insert('ytb_channels', ['ytb_id' => $r_v['ytb_id'],'ytb_type'=>$r_v['ytb_type'],'created'=>time()]);
-            }
-        }
+//        $recommendLinks = $youtube->get_recommend_links();
+//        // 检查是否获取过
+//        foreach ($recommendLinks as $r_k => $r_v) {
+//            $isExist = $youtube->db->select('ytb_channels', 'id', ['ytb_id' => $r_v['ytb_id']]);
+//            if (!$isExist) {
+//                $ytbRes = $youtube->db->insert('ytb_channels', ['ytb_id' => $r_v['ytb_id'],'ytb_type'=>$r_v['ytb_type'],'created'=>time()]);
+//            }
+//        }
     }
 }

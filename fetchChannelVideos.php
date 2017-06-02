@@ -10,8 +10,8 @@ include 'youtube.class.php';
 $youtube = new youtube();
 while (1) {
 // 从数据库获取is_get_detail为0的数据
-//$ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['is_get_video'=>0]);
-    $ytbRes = $youtube->db->select('ytb_search_channels', ['id', 'user_url'], ['AND' => ['is_get_video' => 0, 'subscribers[>]'=>'1000', 'keywords' => ['unboxing', 'reviews', 'gadgets', 'smart tech']]]);
+$ytbRes = $youtube->db->select('ytb_channels', ['id','user_url'], ['is_get_video'=>0,'LIMIT'=>100]);
+//    $ytbRes = $youtube->db->select('ytb_search_channels', ['id', 'user_url'], ['AND' => ['is_get_video' => 0, 'subscribers[>]'=>'1000', 'keywords' => ['unboxing', 'reviews', 'gadgets', 'smart tech']]]);
     if (count($ytbRes) == 0) {
         exit;
     }
@@ -32,13 +32,14 @@ while (1) {
             $detail['view'] = $youtube->get_video_view();
             $detail['type'] = $youtube->get_video_type();
             $detail['url'] = $detailUrl;
+            $detail['created'] = time();
             $videotype[$detail['type']]++;
-            $res = $youtube->db->insert("ytb_search_video", $detail);
+            $res = $youtube->db->insert("ytb_video", $detail);
         }
         arsort($videotype);
         reset($videotype);
         $first_key = key($videotype);
-        $youtube->db->update("ytb_search_channels", ['type' => $first_key, 'is_get_video' => 1], ['id' => $v['id']]);
+        $youtube->db->update("ytb_channels", ['type' => $first_key, 'is_get_video' => 1], ['id' => $v['id']]);
     }
 }
 
